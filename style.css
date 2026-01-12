@@ -2,7 +2,7 @@
 :root {
   /* Light Mode (Default) using OKLCH */
   --bg-main: oklch(98% 0.01 240);       /* 아주 연한 쿨 그레이 */
-  --bg-gradient-start: oklch(94% 0.02 240); /* 조금 더 진한 시작점 */
+  --bg-gradient-start: oklch(90% 0.05 260); /* 눈에 띄는 연한 푸른빛 시작점 */
   --bg-gradient-end: oklch(99% 0 0);    /* 거의 흰색 끝점 */
   --bg-card: oklch(100% 0 0);           /* 순수 흰색 */
   --text-main: oklch(20% 0.02 240);     /* 짙은 네이비/블랙 */
@@ -11,6 +11,8 @@
   --accent-hover: oklch(45% 0.2 250);
   --border-color: oklch(92% 0.01 240);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --glow-light: rgba(255, 255, 255, 0.6); /* 라이트 모드 텍스트 글로우 */
+  --glow-dark: oklch(70% 0.15 150 / 0.4); /* 다크 모드 텍스트 글로우 (액센트 색상 활용) */
   
   --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --container-width: 1024px;
@@ -21,8 +23,8 @@
 [data-theme="dark"] {
   /* Dark Mode */
   --bg-main: oklch(15% 0.02 240);       /* 깊은 다크 네이비 */
-  --bg-gradient-start: oklch(10% 0.03 240); /* 더 어둡고 채도가 있는 시작점 */
-  --bg-gradient-end: oklch(20% 0.02 240);   /* 조금 더 밝은 끝점 */
+  --bg-gradient-start: oklch(8% 0.04 240); /* 더 깊은 다크 블루-그레이 시작점 */
+  --bg-gradient-end: oklch(18% 0.03 240);   /* 약간 밝은 다크 블루-그레이 끝점 */
   --bg-card: oklch(20% 0.02 240);       /* 조금 더 밝은 다크 네이비 */
   --text-main: oklch(95% 0.01 240);     /* 오프 화이트 */
   --text-muted: oklch(70% 0.02 240);
@@ -101,6 +103,11 @@ ul { list-style: none; }
   line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -0.03em;
+  text-shadow: 0 0 10px var(--glow-light), 0 0 20px var(--glow-light); /* 기본 라이트 모드 글로우 */
+}
+
+[data-theme="dark"] .hero-title {
+  text-shadow: 0 0 10px var(--glow-dark), 0 0 20px var(--glow-dark); /* 다크 모드 글로우 */
 }
 
 .accent-text {

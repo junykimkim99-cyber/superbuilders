@@ -2,8 +2,8 @@
 :root {
   /* Light Mode (Default) using OKLCH */
   --bg-main: oklch(98% 0.01 240);       /* 아주 연한 쿨 그레이 */
-  --bg-gradient-start: oklch(100% 0.01 240); /* Main보다 살짝 밝게 */
-  --bg-gradient-end: var(--bg-main);
+  --bg-gradient-start: oklch(94% 0.02 240); /* 조금 더 진한 시작점 */
+  --bg-gradient-end: oklch(99% 0 0);    /* 거의 흰색 끝점 */
   --bg-card: oklch(100% 0 0);           /* 순수 흰색 */
   --text-main: oklch(20% 0.02 240);     /* 짙은 네이비/블랙 */
   --text-muted: oklch(55% 0.02 240);    /* 회색 텍스트 */
@@ -21,8 +21,8 @@
 [data-theme="dark"] {
   /* Dark Mode */
   --bg-main: oklch(15% 0.02 240);       /* 깊은 다크 네이비 */
-  --bg-gradient-start: oklch(10% 0.02 240); /* Main보다 살짝 어둡게 */
-  --bg-gradient-end: var(--bg-main);
+  --bg-gradient-start: oklch(10% 0.03 240); /* 더 어둡고 채도가 있는 시작점 */
+  --bg-gradient-end: oklch(20% 0.02 240);   /* 조금 더 밝은 끝점 */
   --bg-card: oklch(20% 0.02 240);       /* 조금 더 밝은 다크 네이비 */
   --text-main: oklch(95% 0.01 240);     /* 오프 화이트 */
   --text-muted: oklch(70% 0.02 240);
@@ -38,9 +38,11 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-main);
   background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  background-attachment: fixed;
+  min-height: 100vh;
   color: var(--text-main);
   line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease; /* background-color 대신 background로 전환 */
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 a { text-decoration: none; color: inherit; transition: color 0.2s; }

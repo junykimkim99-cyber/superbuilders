@@ -1,1 +1,276 @@
-/* Add styles here */
+/* Reset & Base */
+:root {
+  /* Light Mode (Default) using OKLCH */
+  --bg-main: oklch(98% 0.01 240);       /* 아주 연한 쿨 그레이 */
+  --bg-gradient-start: oklch(100% 0.01 240); /* Main보다 살짝 밝게 */
+  --bg-gradient-end: var(--bg-main);
+  --bg-card: oklch(100% 0 0);           /* 순수 흰색 */
+  --text-main: oklch(20% 0.02 240);     /* 짙은 네이비/블랙 */
+  --text-muted: oklch(55% 0.02 240);    /* 회색 텍스트 */
+  --accent-color: oklch(55% 0.2 250);   /* 비비드한 블루 */
+  --accent-hover: oklch(45% 0.2 250);
+  --border-color: oklch(92% 0.01 240);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  
+  --font-main: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --container-width: 1024px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode */
+  --bg-main: oklch(15% 0.02 240);       /* 깊은 다크 네이비 */
+  --bg-gradient-start: oklch(10% 0.02 240); /* Main보다 살짝 어둡게 */
+  --bg-gradient-end: var(--bg-main);
+  --bg-card: oklch(20% 0.02 240);       /* 조금 더 밝은 다크 네이비 */
+  --text-main: oklch(95% 0.01 240);     /* 오프 화이트 */
+  --text-muted: oklch(70% 0.02 240);
+  --accent-color: oklch(70% 0.15 150);  /* 네온 라임/민트 (다크모드 포인트) */
+  --accent-hover: oklch(80% 0.15 150);
+  --border-color: oklch(25% 0.02 240);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease; /* background-color 대신 background로 전환 */
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.2s; }
+ul { list-style: none; }
+
+/* Utilities */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.site-header {
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-main); /* 투명도 없이 깔끔하게 */
+  z-index: 100;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+.site-header.scrolled {
+  border-bottom-color: var(--border-color);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.site-nav a:hover { color: var(--accent-color); }
+
+/* Hero Section */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+}
+
+.accent-text {
+  color: var(--accent-color);
+  position: relative;
+  display: inline-block;
+}
+/* 밑줄 포인트 */
+.accent-text::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background-color: var(--accent-color);
+  opacity: 0.2;
+  z-index: -1;
+  transform: skewX(-10deg);
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+/* Form */
+.subscribe-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+input[type="email"] {
+  flex: 1;
+  padding: 14px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  color: var(--text-main);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input[type="email"]:focus {
+  border-color: var(--accent-color);
+}
+
+.btn-primary {
+  padding: 14px 24px;
+  background-color: var(--text-main);
+  color: var(--bg-main);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.1s, opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Grid Layouts */
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-bottom: 100px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* Card Styling */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent-color);
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.card-image {
+  height: 160px;
+  background-color: var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.price {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-main);
+}
+
+/* Badge */
+.badge {
+  background-color: var(--border-color);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem; }
+  .subscribe-form { flex-direction: column; }
+  .header-inner { flex-wrap: wrap; gap: 10px; }
+  .site-nav { display: none; /* 추후 모바일 메뉴 추가 가능 */ }
+}
